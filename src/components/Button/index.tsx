@@ -20,6 +20,7 @@ export const Button = ({
         }}>
             <Text style={{ 
                 color: textColor ?? Constants.black,
+                fontWeight: 800,
                 padding: 10
             }}>{text}</Text>
         </TouchableOpacity>

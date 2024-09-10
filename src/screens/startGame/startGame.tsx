@@ -4,10 +4,12 @@ import { Button } from '../../components/Button';
 import { Column } from '../../components/Layout/column';
 import { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useNavigation } from "@react-navigation/native";
 
 export default function StartGame() {
     const [alturaImage, setAlturaImage] = useState(new Animated.Value(0))
     const [larguraImage, setlarguraImage] = useState(new Animated.Value(0))
+    const { navigate } = useNavigation();
 
     useEffect(() => {
         Animated.sequence([
@@ -26,6 +28,7 @@ export default function StartGame() {
 
     const startGame = () => {
         closeMapImage();
+        navigate("fase" as never);
     }
 
     const closeMapImage = () => {
@@ -50,7 +53,7 @@ export default function StartGame() {
                     <Animated.Image style={{ ...styles.image, width: larguraImage, height: alturaImage }} source={require('../../image/logoGame.png')} />
                     <Button
                         text='COMEÇAR'
-                        textColor='#fff'
+                        textColor='#060F20'
                         buttonColor='#7ADD8A'
                         borderColor='#7ADD8A'
                         width={'80%'}
