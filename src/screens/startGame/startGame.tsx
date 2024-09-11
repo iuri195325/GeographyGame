@@ -1,8 +1,9 @@
-import { View, Animated, Image, Easing } from 'react-native';
+import { View, Animated } from 'react-native';
 import { styles } from '../../styles/startGameStyles';
 import { Button } from '../../components/Button';
 import { Column } from '../../components/Layout/column';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from "@react-navigation/native";
 
@@ -11,7 +12,7 @@ export default function StartGame() {
     const [larguraImage, setlarguraImage] = useState(new Animated.Value(0))
     const { navigate } = useNavigation();
 
-    useEffect(() => {
+    useFocusEffect(() => {
         Animated.sequence([
             Animated.timing(larguraImage, {
                 toValue: 350,
@@ -24,7 +25,7 @@ export default function StartGame() {
                 useNativeDriver: false,
             }),
         ]).start();
-    }, [])
+    })
 
     const startGame = () => {
         closeMapImage();

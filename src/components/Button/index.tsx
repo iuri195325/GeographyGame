@@ -1,4 +1,4 @@
-import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
+import { Text, TouchableOpacity} from 'react-native';
 import { ButtonProps } from '../../types/ButtonProps';
 import { Constants } from '../../Constants';
 import { styles } from '../../styles/startGameStyles';

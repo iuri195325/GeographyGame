@@ -8,6 +8,7 @@ export const styles = StyleSheet.create({
       backgroundColor: '#060F20'
     },
     map: {
+        marginTop: 35,
         width: 300,
         height: 300,
     },
@@ -15,6 +16,13 @@ export const styles = StyleSheet.create({
         margin: 0,
         alignItems: 'center',
         justifyContent:'space-between',
+    },
+    column:{
+        backgroundColor: 'rgba(255, 255, 255, 0.07)',
+        marginTop: '10%', 
+        alignItems: 'center',
+        borderRadius: 40,
+        height: '87%'
     },
     image: {
         width: 40,
