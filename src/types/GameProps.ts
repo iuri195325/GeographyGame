@@ -14,4 +14,5 @@ export type ItemType = {
 
 export type GameProps = {
     item: ItemType
+    isCorrectOption?: (value: boolean) => void;
 }

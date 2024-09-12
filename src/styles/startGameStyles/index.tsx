@@ -4,7 +4,7 @@ import { Constants } from '../../Constants';
 export const styles = StyleSheet.create({
     container: {
       flex: 1,
-      marginTop: 30,
+      marginTop: '10%',
       justifyContent: 'center',
       alignItems: 'center',
       backgroundColor: '#060F20'

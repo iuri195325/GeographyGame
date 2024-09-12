@@ -2,15 +2,15 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
     container: {
-      flex: 1,
+      height: '100%',
       padding: 15,
-      marginTop: 30,
+      marginTop: '10%',
       backgroundColor: '#060F20'
     },
     map: {
         marginTop: 35,
-        width: 300,
-        height: 300,
+        width: '90%',
+        height: '52%',
     },
     row: {
         margin: 0,
@@ -22,7 +22,7 @@ export const styles = StyleSheet.create({
         marginTop: '10%', 
         alignItems: 'center',
         borderRadius: 40,
-        height: '87%'
+        height: '90%'
     },
     image: {
         width: 40,

@@ -4,7 +4,7 @@ export const styles = StyleSheet.create({
     container:{
         borderWidth: 1, 
         width: '45%', 
-        padding: 5, 
+        padding: 8, 
         borderRadius: 10 
     },
     image: {
