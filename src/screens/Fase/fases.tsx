@@ -1,21 +1,31 @@
-import { View, Text, Image, FlatList, Button } from 'react-native';
+import { Text, Image, FlatList, Button } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles } from '../../styles/faseStyles';
 import { Row } from '../../components/Layout/row';
 import { LevelIcon } from '../../components/LevelIcon';
 import { Column } from '../../components/Layout/column';
-import { CountrysOptions } from '../../components/CountrysOptions';
-import { gameObject } from '../../Constants';
 import { GridOptions } from '../../components/GridOptions/GridOptions';
 import { useRef, useState } from 'react';
 import { Audio } from 'expo-av';
 import { Sound } from 'expo-av/build/Audio';
 import * as Animatable from 'react-native-animatable';
+import { ItemType } from '../../types/GameProps';
+import { StackNavigation } from '../../navigation';
 
-export const Fase = () => {
+type ParamList = {
+    params: { data: ItemType[]}
+};
+
+interface FaseProps {
+    route: ParamList;
+    navigation: StackNavigation;
+}
+
+export const Fase: React.FC<FaseProps> = ({route}) => {
     const [level, setLevel] = useState<number>(0);
     const [sound, setSound] = useState<Sound | null>(null);
     const viewRef = useRef<any>(null);
+    const { data } = route.params;
 
     const correctOptionSelected = (): void => {
         playSucessSound()
@@ -56,7 +66,7 @@ export const Fase = () => {
     return (
         <SafeAreaView style={styles.container}>
             <FlatList
-                data={[gameObject[level]]}
+                data={[data[level]]}
                 contentContainerStyle={{ height: "90%" }}
                 renderItem={({ item }) => {
                     return (

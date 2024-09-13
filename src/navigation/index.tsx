@@ -1,8 +1,10 @@
 import * as React from 'react';
-import { NavigationContainer  } from '@react-navigation/native';
+import { NavigationContainer, NavigationProp, ParamListBase  } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import StartGame from '../screens/startGame/startGame';
 import { Fase } from '../screens/Fase/fases';
+import { StartGame } from '../screens/startGame/startGame';
+
+export type StackNavigation = NavigationProp<ParamListBase>;
 
 export default function Navegation() {
     const Stack = createNativeStackNavigator();

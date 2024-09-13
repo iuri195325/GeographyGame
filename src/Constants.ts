@@ -85,7 +85,7 @@ export const gameObject: Array<ItemType> = [
         second_option: {
             nome: 'Costa Rica',
             imageName: 'https://img.freeflagicons.com/thumb/round_icon/costa_rica/costa_rica_640.png',
-            isCorrect: true
+            isCorrect: null
         },
         third_option: {
             nome: 'Canadá',

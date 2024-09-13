@@ -2,15 +2,19 @@ import { View, Animated } from 'react-native';
 import { styles } from '../../styles/startGameStyles';
 import { Button } from '../../components/Button';
 import { Column } from '../../components/Layout/column';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useNavigation } from "@react-navigation/native";
+import { embaralharArray } from '../../utils';
+import { StackNavigation } from '../../navigation';
 
-export default function StartGame() {
+interface StartGameProps {
+    navigation: StackNavigation;
+}
+
+export const  StartGame: React.FC<StartGameProps> = ({ navigation }) => {
     const [alturaImage, setAlturaImage] = useState(new Animated.Value(0))
     const [larguraImage, setlarguraImage] = useState(new Animated.Value(0))
-    const { navigate } = useNavigation();
 
     useFocusEffect(() => {
         Animated.sequence([
@@ -29,7 +33,7 @@ export default function StartGame() {
 
     const startGame = () => {
         closeMapImage();
-        navigate("fase" as never);
+        navigation.navigate("fase", {data: embaralharArray()})
     }
 
     const closeMapImage = () => {
