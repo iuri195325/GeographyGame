@@ -1,66 +1,43 @@
-import { View, Animated } from 'react-native';
-
-// Estilos para centralizar e evitar distorções
-const styles = {
-  container: {
-    flex: 1,
-    backgroundColor: "#222",
-    justifyContent: 'center' as const,
-    alignItems: 'center' as const,
-    padding: 16,
-  },
-  column: {
-    alignItems: 'center' as const,
-    justifyContent: 'center' as const,
-    width: '100%' as `${number}%`,
-
-  },
-  image: {
-    alignSelf: 'center' as const,
-    marginBottom: 32,
-    resizeMode: 'contain' as const,
-    maxWidth: 350,
-    maxHeight: 350,
-  },
-};
-
+import { View, Animated, Text, ScrollView } from 'react-native';
 import { Button } from '../../components/Button';
-import { Column } from '../../components/Layout/column';
-import React, { useState } from 'react';
+import { ModoCard } from '../../components/ModoCard';
+import React, { useCallback, useRef } from 'react';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { embaralharLevels } from '../../utils';
 import { levels } from '../../Constants';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
-
-// Define your stack params
-// Adjust this type to match your navigation structure
-// If you have a central types file, import RootStackParamList from there
- type RootStackParamList = {
-   fase: { data: any };
-   records: undefined;
-   startGame: undefined;
- };
+import type { RootStackParamList } from '../../navigation';
+import { useResponsive } from '../../hooks/useResponsive';
+import { styles } from '../../styles/startGameStyles';
+import { theme } from '../../styles/theme';
 
 export const StartGame: React.FC = () => {
-    const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList, 'fase' | 'records' | 'startGame'>>();
-    const [alturaImage, setAlturaImage] = useState(new Animated.Value(0))
-    const [larguraImage, setlarguraImage] = useState(new Animated.Value(0))
+    const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList, 'fase' | 'records' | 'startGame' | 'termo' | 'bandeira'>>();
+    const { width, height, isWide, isLandscape } = useResponsive();
+    const ladoALado = isWide && isLandscape;
+    const logoSize = Math.round(
+        ladoALado ? Math.min(width * 0.36, height * 0.7, 360) : Math.min(width * 0.7, height * 0.3, 320)
+    );
+    const larguraImage = useRef(new Animated.Value(0)).current;
+    const alturaImage = useRef(new Animated.Value(0)).current;
 
-    useFocusEffect(() => {
-        Animated.sequence([
-            Animated.timing(larguraImage, {
-                toValue: 350,
-                duration: 700,
-                useNativeDriver: false,
-            }),
-            Animated.timing(alturaImage, {
-                toValue: 350,
-                duration: 700,
-                useNativeDriver: false,
-            }),
-        ]).start();
-    })
+    useFocusEffect(
+        useCallback(() => {
+            Animated.sequence([
+                Animated.timing(larguraImage, {
+                    toValue: logoSize,
+                    duration: 700,
+                    useNativeDriver: false,
+                }),
+                Animated.timing(alturaImage, {
+                    toValue: logoSize,
+                    duration: 700,
+                    useNativeDriver: false,
+                }),
+            ]).start();
+        }, [logoSize, larguraImage, alturaImage])
+    );
 
     const startGame = () => {
         closeMapImage();
@@ -84,31 +61,49 @@ export const StartGame: React.FC = () => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <View>
-                <Column style={styles.column}>
-                    <Animated.Image style={[
-                        styles.image,
-                        { width: larguraImage, height: alturaImage }
-                    ]} source={require('../../image/logoGame.png')} />
-                    <Button
-                        text='COMEÇAR'
-                        textColor='#060F20' 
-                        buttonColor='#7ADD8A'
-                        borderColor='#7ADD8A'
-                        width={'80%'}
-                        onPress={() => startGame()}
-                        style={{ marginBottom: 24 }}
-                    />
-                    <Button
-                        text='RECORDES'
-                        textColor='#060F20'
-                        buttonColor='#FFDE59'
-                        borderColor='#FFDE59'
-                        width={'80%'}
-                        onPress={() => navigation.navigate({ name: "records", params: undefined })}
-                    />
-                </Column>
-            </View>
+                <ScrollView contentContainerStyle={styles.scroll}>
+                    <View style={[styles.content, ladoALado && styles.contentLado, { minHeight: height - theme.spacing.lg * 2 }]}>
+                        <View style={[styles.hero, ladoALado && styles.heroLado]}>
+                            <Animated.Image
+                                style={{ width: larguraImage, height: alturaImage, marginBottom: theme.spacing.lg }}
+                                resizeMode='contain'
+                                source={require('../../image/logoGame.png')}
+                            />
+                            <Text style={styles.tagline}>Descubra os países do mundo</Text>
+                        </View>
+                        <View style={[styles.buttons, ladoALado && styles.buttonsLado]}>
+                            <ModoCard
+                                titulo="Descubra o Globo"
+                                descricao="Ache o país destacado entre 4 opções"
+                                icone="earth"
+                                cor={theme.colors.primary}
+                                onPress={() => startGame()}
+                            />
+                            <ModoCard
+                                titulo="Adivinhe o País"
+                                descricao="Termo geográfico: descubra o nome em 4 tentativas"
+                                icone="text"
+                                cor={theme.colors.accent}
+                                onPress={() => navigation.navigate({ name: "termo", params: undefined })}
+                            />
+                            <ModoCard
+                                titulo="Adivinhe a Bandeira"
+                                descricao="Identifique o país pela bandeira"
+                                icone="flag"
+                                cor="#66BB6A"
+                                onPress={() => navigation.navigate({ name: "bandeira", params: undefined })}
+                            />
+                            <Button
+                                text='RECORDES'
+                                textColor={theme.colors.text}
+                                buttonColor={theme.colors.surface}
+                                borderColor={theme.colors.surfaceBorder}
+                                width={'100%'}
+                                onPress={() => navigation.navigate({ name: "records", params: undefined })}
+                            />
+                        </View>
+                    </View>
+            </ScrollView>
         </SafeAreaView>
     );
 }

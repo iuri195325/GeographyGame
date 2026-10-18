@@ -1,33 +1,161 @@
 import { StyleSheet } from 'react-native';
+import { theme } from '../theme';
 
 export const styles = StyleSheet.create({
     container: {
-      height: '100%',
-      padding: 15,
-      marginTop: '10%',
-      backgroundColor: '#060F20'
+        flex: 1,
+        backgroundColor: theme.colors.background,
     },
-    map: {
-        marginTop: 35,
-        width: '90%',
-        height: '52%',
-    },
-    row: {
-        margin: 0,
+    header: {
+        flexDirection: 'row',
         alignItems: 'center',
-        justifyContent:'space-between',
+        justifyContent: 'space-between',
+        paddingHorizontal: theme.spacing.md,
+        paddingTop: theme.spacing.sm,
+        gap: theme.spacing.sm,
     },
-    column:{
-        backgroundColor: 'rgba(255, 255, 255, 0.07)',
-        marginTop: '10%', 
+    titleRow: {
+        flexDirection: 'row',
         alignItems: 'center',
-        borderRadius: 40,
-        height: '90%'
+        flex: 1,
+        gap: theme.spacing.sm,
     },
-    image: {
-        width: 40,
-        height: 40,
-        margin: 0,
-        marginLeft: 10
-    }
+    title: {
+        color: theme.colors.text,
+        fontWeight: '900',
+        flexShrink: 1,
+    },
+    progressWrapper: {
+        paddingHorizontal: theme.spacing.md,
+        marginTop: theme.spacing.sm,
+    },
+    progressLabel: {
+        color: theme.colors.textMuted,
+        fontWeight: '700',
+        fontSize: 13,
+        marginBottom: 6,
+    },
+    progressTrack: {
+        height: 8,
+        borderRadius: 4,
+        backgroundColor: theme.colors.surface,
+        overflow: 'hidden',
+    },
+    progressFill: {
+        height: '100%',
+        backgroundColor: theme.colors.primary,
+        borderRadius: 4,
+    },
+    content: {
+        flexGrow: 1,
+        justifyContent: 'center',
+        padding: theme.spacing.md,
+    },
+    contentLandscape: {
+        paddingHorizontal: theme.spacing.lg,
+    },
+    gameAreaPortrait: {
+        width: '100%',
+        alignItems: 'center',
+        gap: theme.spacing.md,
+    },
+    gameAreaLandscape: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: theme.spacing.lg,
+    },
+    gridPortrait: {
+        width: '100%',
+        maxWidth: 520,
+    },
+    gridLandscape: {
+        flex: 1,
+        maxWidth: 480,
+    },
+    mapCard: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: theme.colors.surface,
+        borderWidth: 1,
+        borderColor: theme.colors.surfaceBorder,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 6 },
+        shadowOpacity: 0.35,
+        shadowRadius: 10,
+        elevation: 6,
+    },
+    modalBackdrop: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0,0,0,0.7)',
+        padding: theme.spacing.md,
+    },
+    modalCard: {
+        width: '100%',
+        maxWidth: 420,
+        backgroundColor: theme.colors.surface,
+        borderRadius: theme.radius.lg,
+        borderWidth: 1,
+        borderColor: theme.colors.surfaceBorder,
+        padding: theme.spacing.xl,
+        alignItems: 'center',
+    },
+    celebration: {
+        width: 180,
+        height: 180,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    restartBanner: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        bottom: theme.spacing.lg,
+        alignItems: 'center',
+        pointerEvents: 'none',
+    },
+    restartPill: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: theme.spacing.sm,
+        backgroundColor: theme.colors.wrong,
+        borderColor: theme.colors.wrongBorder,
+        borderWidth: 1,
+        borderRadius: theme.radius.pill,
+        paddingVertical: theme.spacing.sm,
+        paddingHorizontal: theme.spacing.md,
+    },
+    restartBannerText: {
+        color: theme.colors.text,
+        fontWeight: '800',
+        fontSize: 15,
+    },
+    modalTitle: {
+        fontSize: 24,
+        fontWeight: '900',
+        color: theme.colors.primary,
+        marginBottom: theme.spacing.sm,
+        textAlign: 'center',
+    },
+    modalText: {
+        fontSize: 16,
+        color: theme.colors.text,
+        marginBottom: theme.spacing.lg,
+        textAlign: 'center',
+    },
+    primaryButton: {
+        backgroundColor: theme.colors.primary,
+        borderRadius: theme.radius.pill,
+        paddingVertical: 14,
+        paddingHorizontal: 32,
+        marginTop: theme.spacing.sm,
+    },
+    primaryButtonText: {
+        color: theme.colors.primaryDark,
+        fontWeight: '900',
+        fontSize: 16,
+        textAlign: 'center',
+    },
   });

@@ -1,7 +1,10 @@
-import { TouchableOpacityProps, ViewProps } from "react-native";
+import { TouchableOpacityProps } from "react-native";
+
+export type OptionStatus = 'idle' | 'correct' | 'wrong' | 'dimmed';
 
 export type CountrysOptionsProps = {
     nome: string
     imageName: string
-    isCorrectOption?: boolean | null
-} & ViewProps & TouchableOpacityProps
+    status?: OptionStatus
+    flagSize?: number
+} & TouchableOpacityProps
